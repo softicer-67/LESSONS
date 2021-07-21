@@ -5,7 +5,7 @@
 import random
 
 
-arr = [random.randint(1, 9) for i in range(10)]
+arr = [random.randint(1, 4) for i in range(20)]
 
 # для проверки
 print('массив', arr, '\n')
