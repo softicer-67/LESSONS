@@ -15,9 +15,11 @@ print(' Два наименьших элемента в массиве', sort_ar
 
 mini_1 = min(arr)
 min_ind = arr.index(mini_1)
-del arr[min_ind]
-mini_2 = min(arr)
-print(' Два наименьших элемента в массиве', mini_1, 'и', mini_2, '- совершенно бредовый вариант, но тоже сработало ;)')
+new_arr = arr[:]
+del new_arr[min_ind]
+mini_2 = min(new_arr)
+print('\n', arr)
+print(' Два наименьших элемента в массиве', mini_1, 'и', mini_2, '- вариант с копией основного массива ;)')
 
 
 
