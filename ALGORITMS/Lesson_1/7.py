@@ -7,6 +7,7 @@
 a = abs(int(input('Введите длину первого отрезка: ')))
 b = abs(int(input('Введите длину второго отрезка: ')))
 c = abs(int(input('Введите длину третьего отрезка: ')))
+# a, b, c = map(int, input(f'Введите через пробел длину 1, 2, 3 отрезка: ').split())
 
 if a < b + c and b < a + c and c < a + b:
     if a == c and c == b:
