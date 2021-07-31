@@ -21,3 +21,4 @@ print(res.json())
 with open('data2.json', 'w') as f:
     writer = csv.writer(f)
     writer.writerow((res.json(),))
+
