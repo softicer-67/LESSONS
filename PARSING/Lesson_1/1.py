@@ -6,9 +6,12 @@ url = 'https://api.github.com'
 user = 'softicer-67'
 
 
-request = requests.get(f'{url}/users/{user}/repos')
+r = requests.get(f'{url}/users/{user}/repos').json()
 
-js = request.json()
-for i in range(0, len(js)):
-    res = f'Project Number: {i + 1}\nProject Name: {js[i]["name"]}\nProject URL: {js[i]["svn_url"]}'
-    print(res)
+
+for i in range(len(r)):
+    x = f'Project Number: {i + 1}\nProject Name: {r[i]["name"]}\nProject URL: {r[i]["svn_url"]}'
+    print(x)
+
+with open('data.json', 'w') as f:
+    json.dump(r, f)
