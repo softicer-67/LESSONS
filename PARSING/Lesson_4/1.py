@@ -6,6 +6,7 @@
 ссылку на новость;
 дата публикации.
 '''
+import time
 
 from lxml import html
 import requests
@@ -23,9 +24,43 @@ def request_to_mail():
             link = root.xpath(f'//*[@id="index_page"]/div[7]/div[2]/div[3]/div/div/div/div[{i}]/div/div[2]/span[2]/a/@href')
             ist = root.xpath(f'//*[@id="index_page"]/div[7]/div[2]/div[3]/div/div/div/div[{i}]/div/div[2]/div/span[2]/text()')
             tim = root.xpath(f'//*[@id="index_page"]/div[7]/div[2]/div[3]/div/div/div/div[{i}]/div/div[2]/div/span[1]')
-            print([ist[0]], news[0].text, ' ', link[0], tim[0].text)
+            print([ist[0]], news[0].text, link[0], tim[0].text)
     except:
         print('Ошибка запроса')
 
 
+def request_to_lenta():
+    url = 'https://lenta.ru/'
+    response = requests.get('https://lenta.ru/', headers=header)
+    root = html.fromstring(response.text)
+    for i in range(5, 10):
+        try:
+            link = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/@href')
+            news = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/text()')
+            print(news[0], url + link[0])
+        except:
+            print('Ошибка запроса')
+
+
+def request_to_yandex():
+    try:
+        response = requests.get('https://yandex.ru/news/', headers=header)
+        root = html.fromstring(response.text)
+        for i in range(2, 6):
+            ist = root.xpath(f'/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[{i}]/article/div[3]/div[1]/div/span[1]/a')
+            link = root.xpath(f'/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[{i}]/article/div[3]/div[1]/div/span[1]/a/@href')
+            news = root.xpath(f'/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[{i}]/article/div[1]/div/a/h2')
+            tim = root.xpath(f'/html/body/div[3]/div/div[2]/div/div[1]/div[1]/div[{i}]/article/div[3]/div[1]/div/span[2]')
+            print([ist[0].text], news[0].text, link[0], tim[0].text)
+    except:
+        print('Ошибка запроса')
+
+
+print('\tnews.mail.ru'.upper())
 request_to_mail()
+print('=' * 145)
+print('\tlenta.ru'.upper())
+request_to_lenta()
+print('=' * 145)
+print('\tyandex.ru/news'.upper())
+request_to_yandex()
