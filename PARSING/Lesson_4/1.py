@@ -38,7 +38,7 @@ def request_to_lenta():
         for i in range(5, 10):
             link = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/@href')
             news = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/text()')
-            print(news[0], url + link[0])
+            print(news[0], url + link[0], now)
     except:
         print('Ошибка запроса')
 
