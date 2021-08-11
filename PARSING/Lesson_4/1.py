@@ -6,7 +6,6 @@
 ссылку на новость;
 дата публикации.
 '''
-import time
 
 from lxml import html
 import requests
@@ -30,16 +29,16 @@ def request_to_mail():
 
 
 def request_to_lenta():
-    url = 'https://lenta.ru/'
-    response = requests.get('https://lenta.ru/', headers=header)
-    root = html.fromstring(response.text)
-    for i in range(5, 10):
-        try:
+    try:
+        url = 'https://lenta.ru/'
+        response = requests.get('https://lenta.ru/', headers=header)
+        root = html.fromstring(response.text)
+        for i in range(5, 10):
             link = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/@href')
             news = root.xpath(f'//*[@id="root"]/section[2]/div/div/div[2]/div[1]/section/div/div[{i}]/a/text()')
             print(news[0], url + link[0])
-        except:
-            print('Ошибка запроса')
+    except:
+        print('Ошибка запроса')
 
 
 def request_to_yandex():
