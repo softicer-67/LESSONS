@@ -4,33 +4,29 @@
 '''
 
 import requests
-from pprint import pprint
-from lxml import html
 from bs4 import BeautifulSoup as bs
-import requests as req
 
-http = 'https://www.superjob.ru'
-s = input('Желаемая зарплата от: ')
-url = f'{http}/vacancy/search/?payment_value={s}'
+header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
 
 
-respond = req.get(url)
-soup = bs(respond.text, 'lxml')
-vac = [i.text.strip() for i in soup.find_all(class_="_1h3Zg _2rfUm _2hCDz _21a7u")]
-price = [str(i.text).replace('\xa0', ' ') for i in soup.find_all(class_="_1h3Zg _2Wp8I _2rfUm _2hCDz _2ZsgW")]
+def get_data(zp):
+    resp = requests.get(f'https://www.rabota.ru/?sort=relevance&min_salary={zp}', headers=header)
+    soup = bs(resp.text, 'lxml')
+    work = []
+    price = []
+    result = []
+    for i in range(20):
+        w = soup.find_all(class_="vacancy-preview-card__title")
+        work.append(w[i].text.strip())
+        p = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
+        price.append(p[i].text.strip().replace('\xa0', ' '))
 
-vacans = []
-link = []
+        result.append({
+            'Вакансия': work[i],
+            'Зарплата': price[i]
+        })
 
-for i in vac:
-    vacans.append(i)
+        print(result[i])
 
-result = []
-for i in range(20):
-    result.append({
-        'Вакансия': vacans[i],
-        'Зарплата': price[i]
-    })
 
-for i in result:
-    print(i)
+get_data(80000)
