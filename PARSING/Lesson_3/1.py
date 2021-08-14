@@ -6,6 +6,11 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
+import pymongo
+import json
+import codecs
+import csv
+from pymongo import MongoClient
 
 header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36'}
 
@@ -30,4 +35,15 @@ def get_data(zp):
         pd.DataFrame(result).to_csv('dump.csv')
 
 
-get_data(80000)
+def to_mongo():
+    client = MongoClient('localhost')
+    db = client["test01"]
+    col = db["work"]
+    with open('dump.csv', 'r', encoding='utf-8') as read_obj:
+        csv_reader = csv.DictReader(read_obj)
+        mylist = csv_reader
+        col.insert_many(mylist)
+
+
+get_data(80000)  # Требуемая зарплата
+to_mongo()
