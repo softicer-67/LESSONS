@@ -16,12 +16,12 @@ def get_data(zp):
     resp = requests.get(f'https://www.rabota.ru/?sort=relevance&min_salary={zp}', headers=header)
     soup = bs(resp.text, 'lxml')
     result = []
-    w = soup.find_all(class_="vacancy-preview-card__title")
-    p = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
+    work = soup.find_all(class_="vacancy-preview-card__title")
+    price = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
     for i in range(20):
         result.append({
-            'Вакансия': w[i].text.strip(),
-            'Зарплата': p[i].text.strip().replace('\xa0', ' ')
+            'Вакансия': work[i].text.strip(),
+            'Зарплата': price[i].text.strip().replace('\xa0', ' ')
         })
         print(result[i])
         pd.DataFrame(result).to_csv('dump.csv')
