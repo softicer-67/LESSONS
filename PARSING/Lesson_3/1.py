@@ -24,7 +24,7 @@ def get_data(zp):
             'Зарплата': price[i].text.strip().replace('\xa0', ' ')
         })
         print(result[i])
-        pd.DataFrame(result).to_csv('dump.csv')
+    pd.DataFrame(result).to_csv('dump.csv')
 
 
 def to_mongo():
