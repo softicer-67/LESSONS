@@ -29,4 +29,4 @@ def get_data(zp):
         print(result[i])
 
 
-get_data(80000)
+get_data(80000)  # Требуемая зарплата
