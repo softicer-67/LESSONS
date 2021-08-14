@@ -17,7 +17,7 @@ def get_data(zp):
     soup = bs(resp.text, 'lxml')
     result = []
     work = soup.find_all(class_="vacancy-preview-card__title")
-    link = soup.find_all('h3', class_='vacancy-preview-card__title')
+    link = soup.find_all(class_='vacancy-preview-card__title')
     price = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
     for i in range(20):
         result.append({
