@@ -6,9 +6,6 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import pandas as pd
-import pymongo
-import json
-import codecs
 import csv
 from pymongo import MongoClient
 
@@ -18,18 +15,13 @@ header = {'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/53
 def get_data(zp):
     resp = requests.get(f'https://www.rabota.ru/?sort=relevance&min_salary={zp}', headers=header)
     soup = bs(resp.text, 'lxml')
-    work = []
-    price = []
     result = []
+    w = soup.find_all(class_="vacancy-preview-card__title")
+    p = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
     for i in range(20):
-        w = soup.find_all(class_="vacancy-preview-card__title")
-        work.append(w[i].text.strip())
-        p = soup.find_all(class_="vacancy-preview-card__salary vacancy-preview-card__salary-blue")
-        price.append(p[i].text.strip().replace('\xa0', ' '))
-
         result.append({
-            'Вакансия': work[i],
-            'Зарплата': price[i]
+            'Вакансия': w[i].text.strip(),
+            'Зарплата': p[i].text.strip().replace('\xa0', ' ')
         })
         print(result[i])
         pd.DataFrame(result).to_csv('dump.csv')
