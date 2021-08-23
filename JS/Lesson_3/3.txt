@@ -3,7 +3,10 @@ a) Организовать такой массив для хранения то
 b) Организовать функцию countBasketPrice, которая будет считать стоимость корзины.
 
 
-let basket = []
+let basket = [
+    { name: 'Стол', price: 5500 },
+    { name: 'Ноутбук', price: 72000 }
+]
 
 function countBasketPrice(basket) {
     let basketPrice = 0
@@ -17,7 +20,6 @@ console.log("Стоимость корзины: " + countBasketPrice(basket) + "
 
 
 
-let basket = []
 let basketPrice = 0
 basket.forEach(el => basketPrice += el.price)
 console.log("Стоимость корзины: " + basketPrice + " руб.")
