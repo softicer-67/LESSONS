@@ -1,0 +1,24 @@
+3. Товары в корзине хранятся в массиве. Задачи:
+a) Организовать такой массив для хранения товаров в корзине;
+b) Организовать функцию countBasketPrice, которая будет считать стоимость корзины.
+
+
+let basket = []
+
+function countBasketPrice(basket) {
+    let basketPrice = 0
+    for (let prod of basket){
+        basketPrice += prod.price
+    }
+    return basketPrice
+}
+
+console.log("Стоимость корзины: " + countBasketPrice(basket) + " руб.")
+
+
+
+let basket = []
+let basketPrice = 0
+basket.forEach(el => basketPrice += el.price)
+console.log("Стоимость корзины: " + basketPrice + " руб.")
+return basketPrice
