@@ -1,6 +1,15 @@
 1. С помощью цикла while вывести все простые числа в промежутке от 0 до 100
 
-let i = 0
-while(i <= 100){
-  console.log(i++);
+for (let i = 2; i <= 100; i++) {
+    let prime_number = true;
+    for (let j = 2; j < i; j++) {
+        if ((i % j) === 0) {
+            prime_number = false;
+            break
+        }
+    }
+
+    if (prime_number) {
+        console.log(i)
+    }
 }
