@@ -13,3 +13,23 @@ for (let i = 2; i <= 100; i++) {
         console.log(i)
     }
 }
+
+//=================================================
+
+let i = 2
+while (i < 100) {
+    let prime_number = true
+    let j = 2
+
+    while (j < i) {
+        if (i % j === 0) {
+            prime_number = false
+            break
+        }
+        j++
+    }
+    if (prime_number) {
+        console.log(i)
+    }
+    i++
+}
