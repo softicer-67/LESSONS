@@ -1,1 +1,56 @@
-В прошлом уроке уже добавил 
+2. Продолжить работу с интернет-магазином:
+В прошлом домашнем задании вы реализовали корзину на базе массивов. Какими объектами можно заменить их элементы?
+Реализуйте такие объекты.
+Перенести функционал подсчета корзины на объектно-ориентированную базу.
+
+
+class Cart {
+  constructor(personName, cart) {
+    this.personName = personName
+    this.cart = []
+  }
+
+  addToCart({id, name, description, price}) {
+    this.cart.push({id, name, description, price})
+  }
+
+  itemCount() {
+    return this.cart.length
+  }
+
+  cartPrice() {
+    let res = 0
+    this.cart.forEach(el => res += el.price)
+    return res
+  }
+}
+
+const Person = new Cart('Ivan Ivanov', [])
+
+const item1 = {
+  id: 1,
+  name: 'First item',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  price: 500
+}
+const item2 = {
+  id: 2,
+  name: 'Second item',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  price: 750
+}
+const item3 = {
+  id: 3,
+  name: 'Third item',
+  description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+  price: 300
+}
+
+Person.addToCart(item1)
+Person.addToCart(item2)
+Person.addToCart(item3)
+
+
+console.log(Person)
+console.log(Person.cartPrice())
+console.log(Person.itemCount())
