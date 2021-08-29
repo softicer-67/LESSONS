@@ -15,7 +15,7 @@ for (let y = 0; y < 10; y++) {
         css.width = '50px';
         css.height = css.width;
         css.textAlign = 'center';
-		css.lineHeight = '50px'
+	css.lineHeight = '50px'
         css.float = 'left';
         for (let i in css) node.style[i] = css[i];
         if (content)
